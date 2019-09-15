@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Welcome to our Blog {% endblock %}
+{% block stylesheet %}
+
+{% endblock %}
+{% block profile %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-success">Creat Category</button>
+        </form>
+    </div>
+{% endblock %}
+{% block script %} {% endblock %}

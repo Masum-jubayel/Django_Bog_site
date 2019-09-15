@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Welcome to our Blog {% endblock %}
+{% block stylesheet %}
+
+    <!-- Custom Theme files -->
+	<link href="{% static 'login/css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+	<link href="{% static 'login/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" media="all" />
+	<!-- //Custom Theme files -->
+    <!-- web font -->
+	<link href="//fonts.googleapis.com/css?family=Hind:300,400,500,600,700" rel="stylesheet">
+	<!-- //web font -->
+
+ {% endblock %}
+{% block profile %} {% endblock %}
+
+{% block content %}
+    <!-- main -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-md-offset-3">
+                <div class="main-login">
+                    {% if messages %}
+                            <div class="messages">
+                                {% for message in messages %}
+                                <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    <div class="bg-layer">
+                        <h1>Login Your account</h1>
+                        <div class="header-main">
+                            <div class="main-icon">
+                                <span class="fa fa-eercast"></span>
+                            </div>
+                            <div class="header-left-bottom">
+                                <form action="" method="POST">
+                                    {% csrf_token %}
+                                    <div class="icon1">
+                                        <span class="fa fa-user"></span>
+                                        <input type="text" name="user" placeholder="User Name" required=""/>
+                                    </div>
+                                    <div class="icon1">
+                                        <span class="fa fa-lock"></span>
+                                        <input type="password" name="pass" placeholder="Password" required=""/>
+                                    </div>
+                                    <div class="login-check">
+                                         <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i> Keep me logged in</label>
+                                    </div>
+                                    <div class="bottom">
+                                        <button type="submit" class="btn">Log In</button>
+                                    </div>
+                                    <div class="links">
+                                        <p><a href="#">Forgot Password?</a></p>
+                                        <p class="right"><a href="{% url 'blog:register' %}">New User? Register</a></p>
+                                        <div class="clear"></div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="social">
+                                <ul>
+                                    <li>or login using : </li>
+                                    <li><a href="#" class="facebook"><span class="fa fa-facebook"></span></a></li>
+                                    <li><a href="#" class="twitter"><span class="fa fa-twitter"></span></a></li>
+                                    <li><a href="#" class="google"><span class="fa fa-google-plus"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- //main -->
+{% endblock %}
+
+{% block script %}
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Creat Author Profile {% endblock %}
+{% block stylesheet %} {% endblock %}
+{% block profile %} {% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-success">Creat Author</button>
+        </form>
+    </div>
+{% endblock %}
+{% block script %} {% endblock %}

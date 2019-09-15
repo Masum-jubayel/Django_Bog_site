@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Welcome to our Blog {% endblock %}
+{% block stylesheet %}
+    <style xmlns="http://www.w3.org/1999/html">
+        #fh5co-offcanvas .fh5co-menu, #fh5co-offcanvas .fh5co-bio {
+            width: 320px;
+            padding: 30px;
+        }
+        .alert{
+            height: 60px;
+            margin-top: 200px;
+        }
+    </style>
+{% endblock %}
+{% block profile %}
+    <div class="fh5co-bio">
+        <figure>
+            <img src="{{ user.profile_picture.url }}" alt="Free HTML5 Bootstrap Template" class="img-responsive">
+        </figure>
+        <h3 class="heading">About Me</h3>
+        <h2>{{ user.name.get_full_name }}</h2>
+        <h4>{{ user.name.email }}</h4>
+        <p class="text-justify">{{ user.details }}</p>
+        <ul class="fh5co-social">
+            <li><a href="#"><i class="icon-twitter"></i></a></li>
+            <li><a href="#"><i class="icon-facebook"></i></a></li>
+            <li><a href="#"><i class="icon-instagram"></i></a></li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="container">
+        <a href="{% url 'blog:create' %}" class="btn btn-primary pull pull-right">Add New Article</a>
+        <table class="table table-striped">
+             <thead>
+                <tr>
+                    <td>Title</td>
+                    <td>Posted on</td>
+                    <td>Action</td>
+                </tr>
+            <tbody>
+                {% for p in post %}
+                    <tr>
+                        <td>{{ p.title }}</td>
+                        <td>{{ p.posted_on }}</td>
+                        <td><a href="{% url 'blog:delete' pid=p.id %}">Delete <i class="icon-trash"></i></a> ||
+                            <a href="{% url 'blog:update' pid=p.id %}">Edit <i class="icon icon-edit"></i></a></td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+            </thead>
+
+    </table>
+    </div>
+    </div>
+{% endblock %}
+{% block script %} {% endblock %}
