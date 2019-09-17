@@ -1,0 +1,62 @@
+
+(venv) D:\Django\Hellow world\djangoblog>heroku login
+
+heroku: Press any key to open up the browser to login or q to exit:
+Opening browser to https://cli-auth.heroku.com/auth/browser/82e719d7-a461-47f3-9744-c0aab34b29cc
+Logging in... done
+Logged in as masumjubayel@gmail.com
+
+(venv) D:\Django\Hellow world\djangoblog>heroku create 'name something'
+
+Creating app... done, ? radiant-inlet-46539
+https://radiant-inlet-46539.herokuapp.com/ | https://git.heroku.com/radiant-inlet-46539.
+git
+
+(venv) D:\Django\Hellow world\djangoblog>git status
+
+(venv) D:\Django\Hellow world\djangoblog>git add .
+
+
+(venv) D:\Django\Hellow world\djangoblog>git commit -m "procfile is updated"
+
+
+(venv) D:\Django\Hellow world\djangoblog>git status
+
+
+(venv) D:\Django\Hellow world\djangoblog>heroku git:remote -a radiant-inlet-46539
+set git remote heroku to https://git.heroku.com/radiant-inlet-46539.git
+
+
+
+(venv) D:\Django\Hellow world\djangoblog>git push heroku master
+Enumerating objects: 213, done.
+Counting objects: 100% (213/213), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (207/207), done.
+Writing objects: 100% (213/213), 1.74 MiB | 132.00 KiB/s, done.
+Total 213 (delta 24), reused 0 (delta 0)
+remote: Compressing source files... done.
+remote: Building source:
+remote:
+remote:  !     No default language could be detected for this app.
+remote:                         HINT: This occurs when Heroku cannot detect the buildpac
+k to use for this application automatically.
+remote:                         See https://devcenter.heroku.com/articles/buildpacks
+remote:
+remote:  !     Push failed
+remote: Verifying deploy...
+remote:
+remote: !       Push rejected to radiant-inlet-46539.
+remote:
+To https://git.heroku.com/radiant-inlet-46539.git
+ ! [remote rejected] master -> master (pre-receive hook declined)
+error: failed to push some refs to 'https://git.heroku.com/radiant-inlet-46539.git'
+
+(venv) D:\Django\Hellow world\djangoblog>heroku ps:scale web=1
+Scaling dynos... !
+ !    Couldn't find that process type (web).
+
+(venv) D:\Django\Hellow world\djangoblog>git pull heroku master
+fatal: couldn't find remote ref master
+
+(venv) D:\Django\Hellow world\djangoblog>

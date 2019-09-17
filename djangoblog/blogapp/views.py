@@ -1,4 +1,5 @@
 from email.quoprimime import body_check
+from urllib import request
 
 from django.shortcuts import render, HttpResponse, get_object_or_404, redirect, Http404
 from .models import author, category, article, postComment
@@ -11,6 +12,11 @@ from .form import createForm, registerUser, creatAuthor, commentForm, categroyFo
 from django.contrib import messages
 from django.views.generic import TemplateView
 from django.views import View
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.conf import settings
+from django.core.mail import send_mail
+from .token import activation_token
 
 
 # Create your views here.
@@ -225,9 +231,22 @@ def getRegister(request):
     form = registerUser(request.POST or None)
     if form.is_valid():
         instance = form.save(commit=False)
+        instance.is_active = False
         instance.save()
-        messages.success(request, "Registration successfully completed ")
-        return redirect('blog:login')
+        site = get_current_site(request)
+        mail_subject = "confirmation message for blog "
+        message = render_to_string('confirm_email.html', {
+            "user": instance,
+            "domain": site.domain,
+            "uid": instance.id,
+            "token": activation_token.make_token(instance)
+        })
+        to_email = form.cleaned_data.get('email')
+        to_list= [to_email]
+        from_email = settings.EMAIL_HOST_USER
+        send_mail(mail_subject, message, from_email, to_list, fail_silently=True)
+        return HttpResponse("<h1>Thank You for your registration. A Confirmation link wes send to your email. Please check your email.!! </h1>")
+
     return render(request, 'register.html', {"form": form})
 
 
@@ -255,6 +274,16 @@ class creatTopic(TemplateView):
             instance.save()
             messages.success(request, "Category Create Successfully Completed")
             return redirect('blog:category')
+
+
+def activate(request):
+    return render_to_string()
+
+
+
+
+
+
 
 # def getCategoryUpdate(request, pid):
 #     if request.user.is_authenticated:
