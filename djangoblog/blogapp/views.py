@@ -1,5 +1,3 @@
-from email.quoprimime import body_check
-from urllib import request
 
 from django.shortcuts import render, HttpResponse, get_object_or_404, redirect, Http404
 from .models import author, category, article, postComment
@@ -17,6 +15,8 @@ from django.template.loader import render_to_string
 from django.conf import settings
 from django.core.mail import send_mail
 from .token import activation_token
+from .require import renderPdf
+from django.core import serializers
 
 
 # Create your views here.
@@ -234,18 +234,18 @@ def getRegister(request):
         instance.is_active = False
         instance.save()
         site = get_current_site(request)
-        mail_subject = "confirmation message for blog "
+        mail_subject = "Confirmation message for blog"
         message = render_to_string('confirm_email.html', {
             "user": instance,
-            "domain": site.domain,
-            "uid": instance.id,
-            "token": activation_token.make_token(instance)
+            'domain': site.domain,
+            'uid': instance.id,
+            'token': activation_token.make_token(instance)
         })
         to_email = form.cleaned_data.get('email')
-        to_list= [to_email]
+        to_list = [to_email]
         from_email = settings.EMAIL_HOST_USER
         send_mail(mail_subject, message, from_email, to_list, fail_silently=True)
-        return HttpResponse("<h1>Thank You for your registration. A Confirmation link wes send to your email. Please check your email.!! </h1>")
+        return HttpResponse("<h1>Thanks for your registration. A confirmation link was sent to your email</h1>")
 
     return render(request, 'register.html', {"form": form})
 
@@ -261,7 +261,7 @@ class creatTopic(TemplateView):
         if request.user.is_authenticated:
             if request.user.is_staff or request.user.is_superuser:
                 form = categroyForm
-                return render(request, 'create_category.html', {"form": form})
+                return render(request, "create_category.html", {"form": form})
             else:
                 raise Http404("You are a not authorized to access this page")
         else:
@@ -276,40 +276,40 @@ class creatTopic(TemplateView):
             return redirect('blog:category')
 
 
-def activate(request):
-    return render_to_string()
+def activate(request, uid, token):
+    try :
+        user = get_object_or_404(User, pk=uid)
+    except:
+        raise Http404("No user found")
+    if user is not None and activation_token.check_token(user,token):
+        user.is_active = True
+        user.save()
+        return HttpResponse ("<h1> Account is activated. Now you can <a href ='/login'>Login</a></h1>")
+    else:
+        return HttpResponse("<h3>Invalid activation link</h3>")
 
 
 
+class pdf(TemplateView):
+    def get(self, request, id):
+        try:
+            query = get_object_or_404(article, id=id)
+        except:
+            Http404("Content not fond")
+        context = {
+            "article": query
+        }
+        article_pdf = renderPdf("pdf.html", context)
+        return HttpResponse(article_pdf, content_type="application/pdf")
 
+class getJson(TemplateView):
+    def get(self, request):
+        data = article.objects.all()
+        jsonData = serializers.serialize("json", data, indent=2, fields=["title", "body", "image", "category"])
+        return HttpResponse(jsonData, content_type="application/json")
 
-
-
-# def getCategoryUpdate(request, pid):
-#     if request.user.is_authenticated:
-#         you = get_object_or_404(author, name=request.user.id)
-#         post = get_object_or_404(article, id=pid)
-#         form = createForm(request.POST or None, request.FILES or None, instance=post)
-#         if form.is_valid():
-#             instance = form.save(commit=False)
-#             instance.article_author = you
-#             instance.save()
-#             messages.success(request, 'Article Updated Successfully !!')
-#             return redirect('blog:category')
-#         context = {
-#             "form": form,
-#             "you": you
-#         }
-#         return render(request, 'create_category.html', context)
-#     else:
-#         return redirect('blog:login')
-#
-#
-# def getCategoryDelete(request, pid):
-#     if request.user.is_authenticated:
-#         post = get_object_or_404(article, id=pid)
-#         post.delete()
-#         messages.warning(request, 'Article Deleted Successfully !!')
-#         return redirect('blog:category')
-#     else:
-#         return redirect('blog:login')
+class getXml(TemplateView):
+    def get(self, request):
+        data = article.objects.all()
+        xmlData = serializers.serialize("xml", data, indent=2, fields=["title", "body", "image", "category"])
+        return HttpResponse(xmlData, content_type="application/xml")

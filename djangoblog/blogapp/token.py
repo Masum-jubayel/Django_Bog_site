@@ -7,4 +7,4 @@ class tokenGenerate(PasswordResetTokenGenerator):
             six.text_type(user.id)+six.text_type(timestamp)+six.text_type(user.is_active)
         )
 
-activation_token = tokenGenerate()
+activation_token=tokenGenerate()

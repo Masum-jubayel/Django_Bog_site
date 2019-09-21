@@ -1,10 +1,8 @@
-
 from django.contrib.messages import constants as messages
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -17,7 +15,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -27,8 +24,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blogapp'
+    'blogapp',
+    # 3rd party app
+    'ckeditor',
+    'ckeditor_uploader'
 ]
+
+CKEDITOR_UPLOAD_PATH = "upload/"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -41,6 +43,14 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'djangoblog.urls'
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': 900,
+    },
+}
+
 
 TEMPLATES = [
     {
@@ -60,7 +70,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'djangoblog.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -70,7 +79,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -90,7 +98,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -103,7 +110,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
@@ -122,10 +128,9 @@ MESSAGE_TAGS = {
     messages.DEBUG: 'alert alert-info',
 }
 
-
-#gmail confarmation
-EMAIL_USER_TSL = True
+# GMAIL confirmation
+EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'masumjubayel@gmil.com'
+EMAIL_HOST_USER = 'masum.jubayel1@gmail.com'
 EMAIL_HOST_PASSWORD = 'M@sumn684918'
-EMAIL_HOST_USER = 587
+EMAIL_PORT = 587

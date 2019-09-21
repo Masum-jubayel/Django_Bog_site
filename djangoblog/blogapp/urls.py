@@ -4,7 +4,7 @@ from .import views
 
 app_name = "blogapp"
 
-urlpatterns = {
+urlpatterns = [
     path('', views.index.as_view(), name="index"),
     path('author/<name>', views.getauthor.as_view(), name="author"),
     path('article/<int:id>', views.getsingle.as_view(), name="single_post"),
@@ -19,12 +19,13 @@ urlpatterns = {
     path('category', views.getCategory.as_view(), name="category"),
     path('creat/topic', views.creatTopic.as_view(), name="creatTopic"),
 
-    #   account confirmation
+    # create pdf path
+    path('pdf/<int:id>', views.pdf.as_view(), name="pdf"),
+
+    # json and xml format
+    path('json', views.getJson.as_view(), name="json"),
+    path('xml', views.getXml.as_view(), name="xml"),
+
+    # account confirmations
     path('activate/<uid>/<token>', views.activate, name="activate")
-
-
-
-    # path('updateCategory/<int:pid>', views.getCategoryUpdate, name="updateCategory"),
-    # path('deleteCategory/<int:pid>', views.getCategoryDelete, name="deleteCategory")
-
-}
+]
