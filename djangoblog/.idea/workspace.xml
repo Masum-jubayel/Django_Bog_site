@@ -2,17 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28851590-cd46-4f41-9366-f69967711f00" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blogapp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/blogapp/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blogapp/token.py" beforeDir="false" afterPath="$PROJECT_DIR$/blogapp/token.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blogapp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/blogapp/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blogapp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blogapp/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangoblog/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangoblog/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangoblog/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangoblog/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/confirm_email.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/confirm_email.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/create.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/single.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/single.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -295,7 +288,7 @@
       <workItem from="1568995378462" duration="782000" />
       <workItem from="1568998570348" duration="5841000" />
       <workItem from="1569048177900" duration="8084000" />
-      <workItem from="1569087421411" duration="2554000" />
+      <workItem from="1569087421411" duration="3037000" />
     </task>
     <task id="LOCAL-00001" summary="some file are added and some file are edit">
       <created>1568749191273</created>
